@@ -1,0 +1,3524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Premium eco-friendly meal delivery service. Fresh, organic, sustainable meals delivered to your door.">
+    <title>QUISKEYA | Sustainable Premium Meals</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <style>
+        :root {
+            --primary: #5A7D2A;
+            --primary-dark: #415a1e;
+            --secondary: #D4BE8B;
+            --accent: #E0A458;
+            --text: #2C3E50;
+            --text-light: #7F8C8D;
+            --background: #F9F7F4;
+            --white: #FFFFFF;
+            --black: #222222;
+            --gray-light: #ECEDEE;
+            --gray: #B2B2B2;
+            --success: #27AE60;
+            --error: #E74C3C;
+            --border-radius: 8px;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+            --font-primary: 'Playfair Display', serif;
+            --font-secondary: 'Montserrat', sans-serif;
+        }
+
+        [data-theme="dark"] {
+            --primary: #7CA035;
+            --primary-dark: #5A7D2A;
+            --secondary: #D4BE8B;
+            --accent: #E0A458;
+            --text: #E0E0E0;
+            --text-light: #AAAAAA;
+            --background: #121212;
+            --white: #1E1E1E;
+            --black: #F0F0F0;
+            --gray-light: #2A2A2A;
+            --gray: #666666;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        body {
+            font-family: var(--font-secondary);
+            background-color: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: background-color 0.3s ease;
+        }
+
+        h1, h2, h3, h4, h5 {
+            font-family: var(--font-primary);
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            letter-spacing: -0.5px;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+        }
+
+        h4 {
+            font-size: 1.2rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        a:hover {
+            color: var(--primary-dark);
+        }
+
+        button, .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: var(--border-radius);
+            font-family: var(--font-secondary);
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: var(--transition);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: var(--shadow);
+        }
+
+        button:hover, .btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-accent {
+            background-color: var(--accent);
+        }
+
+        .btn-accent:hover {
+            background-color: #c78e4a;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: var(--border-radius);
+            transition: transform 0.3s ease;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-title h2 {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .section-title h2:after {
+            content: '';
+            position: absolute;
+            width: 60%;
+            height: 3px;
+            background-color: var(--accent);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-title p {
+            color: var(--text-light);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Header & Navigation */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 15px 0;
+            background-color: rgba(249, 247, 244, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        [data-theme="dark"] .header {
+            background-color: rgba(18, 18, 18, 0.95);
+        }
+
+        .header.scrolled {
+            padding: 10px 0;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-primary);
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            margin-right: 10px;
+            font-size: 1.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links li a {
+            color: var(--text);
+            font-weight: 600;
+            font-size: 0.95rem;
+            position: relative;
+        }
+
+        .nav-links li a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links li a:hover:after {
+            width: 100%;
+        }
+
+        .nav-icons {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .nav-icon {
+            font-size: 1.2rem;
+            color: var(--text);
+            cursor: pointer;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .nav-icon:hover {
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: var(--accent);
+            color: white;
+            font-size: 0.7rem;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 700;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: var(--text);
+            padding: 5px;
+            transition: transform 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            transform: rotate(30deg);
+        }
+
+        .language-toggle {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .language-toggle span {
+            margin-left: 5px;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4)), url('/api/placeholder/1200/800') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            margin-top: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 0 20px;
+            color: white;
+            position: relative;
+            z-index: 10;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            max-width: 600px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            font-size: 0.8rem;
+            padding: 6px 12px;
+            border-radius: 30px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .scroll-down {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 0.9rem;
+            text-align: center;
+            opacity: 0.8;
+            cursor: pointer;
+            transition: var(--transition);
+            z-index: 10;
+        }
+
+        .scroll-down:hover {
+            opacity: 1;
+            transform: translate(-50%, -5px);
+        }
+
+        .scroll-down i {
+            font-size: 1.5rem;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+
+        /* About Section */
+        .about {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-text {
+            padding-right: 20px;
+        }
+
+        .about-text h2 {
+            margin-bottom: 20px;
+        }
+
+        .about-text p {
+            margin-bottom: 15px;
+            color: var(--text-light);
+        }
+
+        .about-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .about-feature {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .about-feature i {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-top: 5px;
+        }
+
+        .about-feature-text h4 {
+            margin-bottom: 5px;
+        }
+
+        .about-feature-text p {
+            font-size: 0.9rem;
+            margin-bottom: 0;
+        }
+
+        .about-img {
+            position: relative;
+            z-index: 1;
+        }
+
+        .about-img img {
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        .about-img .img-accent {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background-color: var(--accent);
+            border-radius: 10px;
+            z-index: -1;
+            bottom: -20px;
+            right: -20px;
+        }
+
+        /* How It Works Section */
+        .how-it-works {
+            background-color: var(--gray-light);
+            position: relative;
+            overflow: hidden;
+        }
+
+        [data-theme="dark"] .how-it-works {
+            background-color: var(--white);
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .step {
+            text-align: center;
+            padding: 30px;
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        [data-theme="dark"] .step {
+            background-color: var(--gray-light);
+        }
+
+        .step:hover {
+            transform: translateY(-10px);
+        }
+
+        .step-number {
+            position: absolute;
+            top: -15px;
+            left: -15px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+
+        .step i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .step h3 {
+            margin-bottom: 15px;
+        }
+
+        .step p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        /* Featured Meals Section */
+        .featured-meals {
+            position: relative;
+        }
+
+        .meal-filters {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .meal-filter {
+            padding: 8px 16px;
+            background-color: var(--gray-light);
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .meal-filter:hover, .meal-filter.active {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .meals-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .meal-card {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        [data-theme="dark"] .meal-card {
+            background-color: var(--gray-light);
+        }
+
+        .meal-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .meal-img {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .meal-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .meal-card:hover .meal-img img {
+            transform: scale(1.1);
+        }
+
+        .meal-tags {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            display: flex;
+            gap: 5px;
+        }
+
+        .meal-tag {
+            background-color: var(--primary);
+            color: white;
+            font-size: 0.7rem;
+            padding: 4px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        .meal-tag.vegan {
+            background-color: #27AE60;
+        }
+
+        .meal-tag.keto {
+            background-color: #8E44AD;
+        }
+
+        .meal-tag.gluten-free {
+            background-color: #E67E22;
+        }
+
+        .meal-info {
+            padding: 20px;
+        }
+
+        .meal-info h3 {
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .meal-info p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .meal-meta {
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-light);
+            font-size: 0.85rem;
+            margin-bottom: 15px;
+        }
+
+        .meal-meta span {
+            display: flex;
+            align-items: center;
+        }
+
+        .meal-meta i {
+            margin-right: 5px;
+            color: var(--primary);
+        }
+
+        .meal-price {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .price {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--text);
+        }
+
+        .add-to-cart {
+            background-color: var(--primary);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .add-to-cart:hover {
+            background-color: var(--primary-dark);
+            transform: scale(1.1);
+        }
+
+        .load-more {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        /* AI Calculator Section */
+        .ai-calculator {
+            background-color: var(--gray-light);
+            position: relative;
+            overflow: hidden;
+        }
+
+        [data-theme="dark"] .ai-calculator {
+            background-color: var(--white);
+        }
+
+        .calculator-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .calculator-form {
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+
+        [data-theme="dark"] .calculator-form {
+            background-color: var(--gray-light);
+        }
+
+        .calculator-form h3 {
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid var(--gray);
+            border-radius: var(--border-radius);
+            font-family: var(--font-secondary);
+            background-color: var(--white);
+            color: var(--text);
+            transition: var(--transition);
+        }
+
+        [data-theme="dark"] .form-group input, [data-theme="dark"] .form-group select {
+            background-color: var(--white);
+            color: var(--text);
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .calculator-result {
+            padding: 30px;
+        }
+
+        .calculator-result h3 {
+            margin-bottom: 20px;
+        }
+
+        .result-box {
+            padding: 20px;
+            border: 2px solid var(--primary);
+            border-radius: var(--border-radius);
+            margin-bottom: 20px;
+        }
+
+        .result-box h4 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .result-box p {
+            margin-bottom: 5px;
+        }
+
+        .result-meals {
+            margin-top: 20px;
+        }
+
+        .result-meal {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--gray-light);
+        }
+
+        .result-meal:last-child {
+            border-bottom: none;
+        }
+
+        .result-meal-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .result-meal-info img {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: var(--border-radius);
+        }
+
+        .result-meal-calories {
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .testimonials-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .testimonials-slider {
+            position: relative;
+        }
+
+        .testimonial {
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        [data-theme="dark"] .testimonial {
+            background-color: var(--gray-light);
+        }
+
+        .testimonial-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            overflow: hidden;
+        }
+
+        .testimonial-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .testimonial-text:before, .testimonial-text:after {
+            content: '"';
+            font-size: 3rem;
+            color: var(--primary);
+            opacity: 0.3;
+            position: absolute;
+        }
+
+        .testimonial-text:before {
+            top: -20px;
+            left: -10px;
+        }
+
+        .testimonial-text:after {
+            bottom: -40px;
+            right: -10px;
+        }
+
+        .testimonial-author {
+            margin-top: 20px;
+        }
+
+        .testimonial-author h4 {
+            margin-bottom: 5px;
+        }
+
+        .testimonial-author p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 0;
+        }
+
+        .testimonial-rating {
+            color: var(--accent);
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+
+        .testimonial-controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .testimonial-arrow {
+            width: 40px;
+            height: 40px;
+            background-color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        [data-theme="dark"] .testimonial-arrow {
+            background-color: var(--gray-light);
+        }
+
+        .testimonial-arrow:hover {
+            background-color: var(--primary);
+            color: white;
+            transform: scale(1.1);
+        }
+
+        /* Blog Section */
+        .blog {
+            background-color: var(--gray-light);
+            position: relative;
+            overflow: hidden;
+        }
+
+        [data-theme="dark"] .blog {
+            background-color: var(--white);
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .blog-card {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        [data-theme="dark"] .blog-card {
+            background-color: var(--gray-light);
+        }
+
+        .blog-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .blog-img {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .blog-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .blog-card:hover .blog-img img {
+            transform: scale(1.1);
+        }
+
+        .blog-content {
+            padding: 20px;
+        }
+
+        .blog-date {
+            color: var(--text-light);
+            font-size: 0.8rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .blog-content h3 {
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .blog-content p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .blog-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-bottom: 15px;
+        }
+
+        .blog-tag {
+            background-color: var(--gray-light);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        [data-theme="dark"] .blog-tag {
+            background-color: var(--white);
+        }
+
+        .blog-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid var(--gray-light);
+            padding-top: 15px;
+        }
+
+        .blog-author {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .blog-author img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+        }
+
+        .blog-author span {
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .blog-stats {
+            display: flex;
+            gap: 15px;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .blog-stats span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* FAQ Section */
+        .faq {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .accordion {
+            margin-top: 40px;
+        }
+
+        .accordion-item {
+            margin-bottom: 15px;
+            border: 1px solid var(--gray-light);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+        }
+
+        .accordion-header {
+            background-color: var(--white);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        [data-theme="dark"] .accordion-header {
+            background-color: var(--gray-light);
+        }
+
+        .accordion-header:hover {
+            background-color: var(--gray-light);
+        }
+
+        [data-theme="dark"] .accordion-header:hover {
+            background-color: var(--white);
+        }
+
+        .accordion-header h4 {
+            margin-bottom: 0;
+        }
+
+        .accordion-icon {
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background-color: var(--white);
+        }
+
+        [data-theme="dark"] .accordion-content {
+            background-color: var(--gray-light);
+        }
+
+        .accordion-content-inner {
+            padding: 0 20px 20px;
+            color: var(--text-light);
+        }
+
+        .accordion-item.active .accordion-icon {
+    transform: rotate(180deg);
+}
+
+.accordion-item.active .accordion-content {
+    max-height: 500px;
+}
+
+/* CTA Section */
+.cta {
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/api/placeholder/1200/800') center/cover no-repeat;
+    color: white;
+    text-align: center;
+    padding: 100px 0;
+}
+
+.cta h2 {
+    max-width: 700px;
+    margin: 0 auto 20px;
+}
+
+.cta p {
+    max-width: 600px;
+    margin: 0 auto 30px;
+    opacity: 0.9;
+}
+
+/* Footer */
+.footer {
+    background-color: var(--white);
+    padding: 80px 0 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+[data-theme="dark"] .footer {
+    background-color: var(--gray-light);
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 60px;
+}
+
+.footer-logo {
+    font-family: var(--font-primary);
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.footer-logo i {
+    margin-right: 10px;
+}
+
+.footer-text {
+    color: var(--text-light);
+    margin-bottom: 20px;
+}
+
+.footer-social {
+    display: flex;
+    gap: 15px;
+}
+
+.social-icon {
+    width: 40px;
+    height: 40px;
+    background-color: var(--gray-light);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--text);
+    transition: var(--transition);
+}
+
+[data-theme="dark"] .social-icon {
+    background-color: var(--white);
+}
+
+.social-icon:hover {
+    background-color: var(--primary);
+    color: white;
+    transform: translateY(-5px);
+}
+
+.footer-title {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+.footer-links {
+    list-style: none;
+}
+
+.footer-links li {
+    margin-bottom: 10px;
+}
+
+.footer-links a {
+    color: var(--text-light);
+    transition: var(--transition);
+    font-size: 0.95rem;
+}
+
+.footer-links a:hover {
+    color: var(--primary);
+    margin-left: 5px;
+}
+
+.footer-contact {
+    margin-bottom: 15px;
+}
+
+.footer-contact i {
+    color: var(--primary);
+    margin-right: 10px;
+    font-size: 1.1rem;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid var(--gray-light);
+    color: var(--text-light);
+    font-size: 0.9rem;
+}
+
+.payment-methods {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.payment-icon {
+    width: 40px;
+    height: 25px;
+    background-color: var(--gray-light);
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+[data-theme="dark"] .payment-icon {
+    background-color: var(--white);
+}
+
+/* Newsletter Modal */
+.newsletter-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1100;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.newsletter-modal.open {
+    opacity: 1;
+    visibility: visible;
+}
+
+.newsletter-box {
+    width: 90%;
+    max-width: 500px;
+    background-color: var(--white);
+    border-radius: var(--border-radius);
+    padding: 30px;
+    position: relative;
+    box-shadow: var(--shadow);
+    transform: translateY(50px);
+    opacity: 0;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+[data-theme="dark"] .newsletter-box {
+    background-color: var(--gray-light);
+}
+
+.newsletter-modal.open .newsletter-box {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.close-modal {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--text-light);
+    transition: var(--transition);
+}
+
+.close-modal:hover {
+    color: var(--error);
+    transform: rotate(90deg);
+}
+
+.newsletter-box h3 {
+    margin-bottom: 10px;
+}
+
+.newsletter-box p {
+    margin-bottom: 20px;
+    color: var(--text-light);
+}
+
+.newsletter-form {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.newsletter-form input {
+    flex: 1;
+    padding: 10px 15px;
+    border: 1px solid var(--gray);
+    border-radius: var(--border-radius) 0 0 var(--border-radius);
+    font-family: var(--font-secondary);
+}
+
+.newsletter-form button {
+    padding: 10px 20px;
+    border-radius: 0 var(--border-radius) var(--border-radius) 0;
+}
+
+.newsletter-notice {
+    font-size: 0.8rem;
+    color: var(--text-light);
+}
+
+/* Back to Top Button */
+.back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background-color: var(--primary);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease, background-color 0.3s ease;
+    z-index: 900;
+}
+
+.back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.back-to-top:hover {
+    background-color: var(--primary-dark);
+}
+
+/* Media Queries */
+@media (max-width: 1024px) {
+    .hero h1 {
+        font-size: 3rem;
+    }
+    .about-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    .about-text {
+        padding-right: 0;
+    }
+    .calculator-container {
+        grid-template-columns: 1fr;
+    }
+    .footer-content {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+    .section {
+        padding: 60px 0;
+    }
+    .nav-links {
+        display: none;
+    }
+    .mobile-menu-btn {
+        display: block;
+    }
+    .mobile-menu {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: var(--background);
+        z-index: 1000;
+        padding: 80px 20px;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+    }
+    .mobile-menu.open {
+        transform: translateX(0);
+    }
+    .close-menu {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        font-size: 1.5rem;
+        cursor: pointer;
+    }
+    .mobile-nav-links {
+        list-style: none;
+    }
+    .mobile-nav-links li {
+        margin-bottom: 20px;
+    }
+    .mobile-nav-links a {
+        color: var(--text);
+        font-size: 1.2rem;
+        font-weight: 600;
+    }
+    .about-features {
+        grid-template-columns: 1fr;
+    }
+    .footer-content {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero h1 {
+        font-size: 2rem;
+    }
+    .hero p {
+        font-size: 1rem;
+    }
+    .hero-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .steps {
+        grid-template-columns: 1fr;
+    }
+    .testimonial {
+        padding: 20px;
+    }
+}
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container nav-container">
+            <a href="#" class="logo"><i class="fas fa-leaf"></i>QUISKEYA</a>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#how-it-works">How It Works</a></li>
+                <li><a href="#meals">Meals</a></li>
+                <li><a href="#calculator">Meal Planner</a></li>
+                <li><a href="#blog">Blog</a></li>
+                <li><a href="#faq">FAQ</a></li>
+            </ul>
+            <div class="nav-icons">
+                <div class="language-toggle">
+                    <i class="fas fa-globe"></i>
+                    <span>EN</span>
+                </div>
+                <button class="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <div class="nav-icon">
+                    <i class="fas fa-search"></i>
+                </div>
+                <div class="nav-icon">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="nav-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">3</span>
+                </div>
+                <div class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <div class="close-menu">
+            <i class="fas fa-times"></i>
+        </div>
+        
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">Premium Quality</div>
+                <h1>Sustainable Gourmet Meals Delivered to Your Door</h1>
+                <p>Discover chef-crafted, eco-friendly meals that are as good for you as they are for the planet.</p>
+                <div class="hero-buttons">
+                    <a href="#meals" class="btn">Explore Our Menu</a>
+                    <a href="#how-it-works" class="btn btn-secondary">How It Works</a>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-down">
+            <span>Scroll Down</span>
+            <br>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about section">
+        <div class="container">
+            <div class="section-title">
+                <h2>About QUISKEYA</h2>
+                <p>Our mission is to make sustainable eating delicious, convenient, and accessible to everyone.</p>
+            </div>
+            <div class="about-content">
+                <div class="about-text fade-in">
+                    <h2>We're Redefining Premium Meal Delivery</h2>
+                    <p>Founded in 2023, QUISKEYA was born from a passion for great food and a commitment to environmental responsibility. We believe that what's good for the earth is good for you.</p>
+                    <p>Our team of expert chefs create gourmet meals using only the finest organic, locally-sourced ingredients. Every dish is nutritionally balanced and delivered in 100% compostable packaging.</p>
+                    <div class="about-features">
+                        <div class="about-feature">
+                            <i class="fas fa-leaf"></i>
+                            <div class="about-feature-text">
+                                <h4>Organic Ingredients</h4>
+                                <p>Sourced from local farms that practice sustainable agriculture.</p>
+                            </div>
+                        </div>
+                        <div class="about-feature">
+                            <i class="fas fa-utensils"></i>
+                            <div class="about-feature-text">
+                                <h4>Chef-Crafted</h4>
+                                <p>Created by Michelin-trained chefs for exceptional flavor.</p>
+                            </div>
+                        </div>
+                        <div class="about-feature">
+                            <i class="fas fa-recycle"></i>
+                            <div class="about-feature-text">
+                                <h4>Zero Waste</h4>
+                                <p>All packaging is compostable or recyclable.</p>
+                            </div>
+                        </div>
+                        <div class="about-feature">
+                            <i class="fas fa-heart"></i>
+                            <div class="about-feature-text">
+                                <h4>Nutritionist Approved</h4>
+                                <p>Each meal is balanced for optimal health.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-img fade-in">
+                    <img src="/api/placeholder/600/400/Healthy sustainable food preparation.jpg" alt="Healthy sustainable food preparation">
+                    <div class="img-accent"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="how-it-works section">
+        <div class="container">
+            <div class="section-title">
+                <h2>How It Works</h2>
+                <p>Getting started with QUISKEYA is simple. Follow these easy steps for delicious, sustainable meals.</p>
+            </div>
+            <div class="steps">
+                <div class="step fade-in">
+                    <div class="step-number">1</div>
+                    <i class="fas fa-clipboard-list"></i>
+                    <h3>Choose Your Plan</h3>
+                    <p>Select from our weekly, bi-weekly, or monthly subscription plans, or build your own custom box.</p>
+                </div>
+                <div class="step fade-in">
+                    <div class="step-number">2</div>
+                    <i class="fas fa-carrot"></i>
+                    <h3>Customize Your Meals</h3>
+                    <p>Browse our seasonal menu and select the meals that match your dietary preferences and tastes.</p>
+                </div>
+                <div class="step fade-in">
+                    <div class="step-number">3</div>
+                    <i class="fas fa-truck"></i>
+                    <h3>We Deliver</h3>
+                    <p>Your meals arrive fresh in our eco-friendly packaging, precisely when you need them.</p>
+                </div>
+                <div class="step fade-in">
+                    <div class="step-number">4</div>
+                    <i class="fas fa-fire"></i>
+                    <h3>Heat & Enjoy</h3>
+                    <p>Follow the simple heating instructions and enjoy restaurant-quality meals in minutes.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Meals Section -->
+    <section id="meals" class="featured-meals section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Featured Meals</h2>
+                <p>Explore our chef-crafted, sustainably sourced dishes designed to delight your palate and nourish your body.</p>
+            </div>
+            <div class="meal-filters">
+                <div class="meal-filter active">All</div>
+                <div class="meal-filter">Vegetarian</div>
+                <div class="meal-filter">Vegan</div>
+                <div class="meal-filter">Keto</div>
+                <div class="meal-filter">Gluten-Free</div>
+                <div class="meal-filter">Paleo</div>
+            </div>
+            <div class="meals-grid">
+                <!-- Meal 1 -->
+                <div class="meal-card fade-in">
+                    <div class="meal-img">
+                        <img src="/api/placeholder/400/300/OIP.jpeg" alt="Wild-Caught Salmon Bowl">
+                        <div class="meal-tags">
+                            <span class="meal-tag gluten-free">Gluten-Free</span>
+                        </div>
+                    </div>
+                    <div class="meal-info">
+                        <h3>Wild-Caught Salmon Bowl</h3>
+                        <p>Sustainably caught salmon with quinoa, roasted vegetables, and lemon-dill sauce.</p>
+                        <div class="meal-meta">
+                            <span><i class="fas fa-clock"></i> 5 min</span>
+                            <span><i class="fas fa-fire"></i> 420 cal</span>
+                            <span><i class="fas fa-utensils"></i> 1 serving</span>
+                        </div>
+                        <div class="meal-price">
+                            <div class="price">$16.95</div>
+                            <div class="add-to-cart">
+                                <i class="fas fa-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Meal 2 -->
+                <div class="meal-card fade-in">
+                    <div class="meal-img">
+                        <img src="/api/placeholder/400/300/2vqj3iytryd51.jpg" alt="Plant-Based Buddha Bowl">
+                        <div class="meal-tags">
+                            <span class="meal-tag vegan">Vegan</span>
+                            <span class="meal-tag gluten-free">Gluten-Free</span>
+                        </div>
+                    </div>
+                    <div class="meal-info">
+                        <h3>Plant-Based Buddha Bowl</h3>
+                        <p>A colorful mix of roasted sweet potatoes, avocado, chickpeas, and tahini dressing.</p>
+                        <div class="meal-meta">
+                            <span><i class="fas fa-clock"></i> 3 min</span>
+                            <span><i class="fas fa-fire"></i> 380 cal</span>
+                            <span><i class="fas fa-utensils"></i> 1 serving</span>
+                        </div>
+                        <div class="meal-price">
+                            <div class="price">$14.95</div>
+                            <div class="add-to-cart">
+                                <i class="fas fa-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Meal 3 -->
+                <div class="meal-card fade-in">
+                    <div class="meal-img">
+                        <img src="/api/placeholder/400/300/OIP (1).jpeg" alt="Grass-Fed Beef Stir-Fry">
+                        <div class="meal-tags">
+                            <span class="meal-tag keto">Keto</span>
+                        </div>
+                    </div>
+                    <div class="meal-info">
+                        <h3>Grass-Fed Beef Stir-Fry</h3>
+                        <p>Tender slices of grass-fed beef with seasonal vegetables in a ginger-garlic sauce.</p>
+                        <div class="meal-meta">
+                            <span><i class="fas fa-clock"></i> 4 min</span>
+                            <span><i class="fas fa-fire"></i> 450 cal</span>
+                            <span><i class="fas fa-utensils"></i> 1 serving</span>
+                        </div>
+                        <div class="meal-price">
+                            <div class="price">$17.95</div>
+                            <div class="add-to-cart">
+                                <i class="fas fa-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- More meals would go here -->
+            </div>
+            <div class="load-more">
+                <button class="btn btn-secondary">Load More Meals</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Meal Calculator Section -->
+    <section id="calculator" class="ai-calculator section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Personalized Meal Planner</h2>
+                <p>Our AI-powered calculator helps you find the perfect meal plan based on your dietary needs and preferences.</p>
+            </div>
+            <div class="calculator-container">
+                <div class="calculator-form fade-in">
+                    <h3>Tell Us About Yourself</h3>
+                    <div class="form-group">
+                        <label for="goal">Your Goal</label>
+                        <select id="goal">
+                            <option value="weight-loss">Weight Loss</option>
+                            <option value="maintenance">Maintenance</option>
+                            <option value="muscle-gain">Muscle Gain</option>
+                            <option value="health">Overall Health</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="diet">Dietary Preference</label>
+                        <select id="diet">
+                            <option value="omnivore">Omnivore</option>
+                            <option value="vegetarian">Vegetarian</option>
+                            <option value="vegan">Vegan</option>
+                            <option value="keto">Keto</option>
+                            <option value="paleo">Paleo</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="allergies">Allergies or Restrictions</label>
+                        <select id="allergies">
+                            <option value="none">None</option>
+                            <option value="gluten">Gluten</option>
+                            <option value="dairy">Dairy</option>
+                            <option value="nuts">Nuts</option>
+                            <option value="soy">Soy</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="meals-per-week">Meals Per Week</label>
+                        <select id="meals-per-week">
+                            <option value="5">5 Meals</option>
+                            <option value="10">10 Meals</option>
+                            <option value="15">15 Meals</option>
+                            <option value="20">20 Meals</option>
+                        </select>
+                    </div>
+                    <button class="btn">Get Your Personalized Plan</button>
+                </div>
+                <div class="calculator-result fade-in">
+                    <h3>Your Personalized Recommendations</h3>
+                    <div class="result-box">
+                        <h4>Ideal Plan: Fit & Active</h4>
+                        <p><strong>Calories:</strong> 1800-2000 per day</p>
+                        <p><strong>Protein:</strong> 100-120g per day</p>
+                        <p><strong>Cost:</strong> $129.95/week (10 meals)</p>
+                    </div>
+                    <h4>Recommended Meals:</h4>
+                    <div class="result-meals">
+                        <div class="result-meal">
+                            <div class="result-meal-info">
+                                <img src="/api/placeholder/100/100/healthy-cooking-meal-youtube-thumbnail.png" alt="Meal Thumbnail">
+                                <div>
+                                    <h4>Mediterranean Chicken</h4>
+                                    <p>With quinoa & vegetables</p>
+                                </div>
+                            </div>
+                            <div class="result-meal-calories">410 cal</div>
+                        </div>
+                        <div class="result-meal">
+                            <div class="result-meal-info">
+                                <img src="/api/placeholder/100/100/healthy-cooking-meal-youtube-thumbnail.png" alt="Meal Thumbnail">
+                                <div>
+                                    <h4>Herb-Crusted Salmon</h4>
+                                    <p>With sweet potato mash</p>
+                                </div>
+                            </div>
+                            <div class="result-meal-calories">450 cal</div>
+                        </div>
+                    </div>
+                    <button class="btn btn-accent" style="width: 100%; margin-top: 20px;">Order This Plan</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Customer Stories</h2>
+                <p>Hear what our customers have to say about their experience with TERRA.</p>
+            </div>
+            <div class="testimonials-container">
+                <div class="testimonials-slider">
+                    <div class="testimonial fade-in">
+                        <div class="testimonial-avatar">
+                            <img src="/api/placeholder/80/80/2906200.png" alt="Customer Avatar">
+                        </div>
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="testimonial-text">
+                            <p>TERRA has completely transformed my weeknight routine. The meals are incredibly delicious, and I love knowing that I'm supporting sustainable practices with every bite.</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <h4>Sarah Johnson</h4>
+                            <p>Member since 2023</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-controls">
+                    <div class="testimonial-arrow prev">
+                        <i class="fas fa-chevron-left"></i>
+                    </div>
+                    <div class="testimonial-arrow next">
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section id="blog" class="blog section">
+        <div class="container">
+            <div class="section-title">
+                <h2>From Our Blog</h2>
+                <p>Discover the latest insights on sustainable eating, nutrition, and eco-friendly living.</p>
+            </div>
+            <div class="blog-grid">
+                <!-- Blog Post 1 -->
+                <div class="blog-card fade-in">
+                    <div class="blog-img">
+                        <img src="/api/placeholder/400/300/Blog.jpeg" alt="Blog Image">
+                    </div>
+                    <div class="blog-content">
+                        <span class="blog-date">March 15, 2025</span>
+                        <h3>The Environmental Impact of Your Food Choices</h3>
+                        <p>How small changes in your diet can make a big difference for the planet.</p>
+                        <div class="blog-tags">
+                            <span class="blog-tag">Sustainability</span>
+                            <span class="blog-tag">Eco-Friendly</span>
+                        </div>
+                        <div class="blog-footer">
+                            <div class="blog-author">
+                                <img src="/api/placeholder/30/30/author.webp" alt="Author Avatar">
+                                <span>Emma Green</span>
+                            </div>
+                            <div class="blog-stats">
+                                <span><i class="far fa-eye"></i> 245</span>
+                                <span><i class="far fa-comment"></i> 18</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Blog Post 2 -->
+                <div class="blog-card fade-in">
+                    <div class="blog-img">
+                        <img src="/api/placeholder/400/300/Blog.jpeg" alt="Blog Image">
+                    </div>
+                    <div class="blog-content">
+                        <span class="blog-date">March 8, 2025</span>
+                        <h3>Seasonal Eating: Why It Matters for Your Health</h3>
+                        <p>The nutritional benefits of eating foods when they're naturally at their peak.</p>
+                        <div class="blog-tags">
+                            <span class="blog-tag">Nutrition</span>
+                            <span class="blog-tag">Seasonal</span>
+                        </div>
+                        <div class="blog-footer">
+                            <div class="blog-author">
+                                <img src="/api/placeholder/30/30/author.webp" alt="Author Avatar">
+                                <span>Dr. Michael Chen</span>
+                            </div>
+                            <div class="blog-stats">
+                                <span><i class="far fa-eye"></i> 312</span>
+                                <span><i class="far fa-comment"></i> 24</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Blog Post 3 -->
+                <div class="blog-card fade-in">
+                    <div class="blog-img">
+                        <img src="/api/placeholder/400/300/Blog.jpeg" alt="Blog Image">
+                    </div>
+                    <div class="blog-content">
+                        <span class="blog-date">March 1, 2025</span>
+                        <h3>5 Myths About Sustainable Eating Debunked</h3>
+                        <p>Separating fact from fiction when it comes to eco-friendly food choices.</p>
+                        <div class="blog-tags">
+                            <span class="blog-tag">Myths</span>
+                            <span class="blog-tag">Facts</span>
+                        </div>
+                        <div class="blog-footer">
+                            <div class="blog-author">
+                                <img src="/api/placeholder/30/30/author.webp" alt="Author Avatar">
+                                <span>Alex Rivera</span>
+                            </div>
+                            <div class="blog-stats">
+                                <span><i class="far fa-eye"></i> 189</span>
+                                <span><i class="far fa-comment"></i> 12</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="view-all">
+                <a href="#" class="btn btn-secondary">View All Articles</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="faq section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Frequently Asked Questions</h2>
+                <p>Find answers to the most common questions about our meals and services.</p>
+            </div>
+            <div class="accordion">
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <h3>How does delivery work?</h3>
+                        <div class="accordion-icon">
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+                    <div class="accordion-content">
+                        <p>We deliver your meals in insulated, eco-friendly packaging to keep them fresh. Deliveries are made between 8am and 8pm on your selected delivery day. You'll receive a notification when your order is on its way, and you don't need to be home to receive it. Our packaging keeps meals fresh for up to 12 hours after delivery.</p>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <h3>How long do meals stay fresh?</h3>
+                        <div class="accordion-icon">
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Our meals stay fresh in your refrigerator for up to 7 days from the delivery date. Each meal has a "best by" date clearly marked on the packaging. We recommend consuming them by this date for optimal taste and nutritional value.</p>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <h3>Can I skip deliveries or cancel my subscription?</h3>
+                        <div class="accordion-icon">
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Yes, you have complete flexibility with your subscription. You can skip weeks, pause, or cancel your subscription anytime through your account dashboard. We just ask that changes be made at least 5 days before your scheduled delivery date.</p>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <h3>What makes your packaging sustainable?</h3>
+                        <div class="accordion-icon">
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+                    <div class="accordion-content">
+                        <p>All our packaging is either compostable or recyclable. Our meal containers are made from plant-based materials that break down in home compost systems within 90 days. The insulation in our delivery boxes is made from recycled denim and is also compostable. Ice packs are non-toxic and the gel inside can be safely disposed of down the drain.</p>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <h3>Do you accommodate allergies and dietary restrictions?</h3>
+                        <div class="accordion-icon">
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Yes, we offer meals that accommodate various dietary preferences including vegetarian, vegan, gluten-free, dairy-free, and nut-free options. All allergens are clearly labeled on each meal. While we take precautions to avoid cross-contamination, our meals are prepared in a facility that handles major allergens, so we cannot guarantee that meals are allergen-free.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <h2>Start Your Sustainable Food Journey Today</h2>
+            <p>Join thousands of satisfied customers who have transformed their eating habits while contributing to a healthier planet.</p>
+            <a href="#" class="btn btn-accent">Get Started Now</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <div class="footer-logo"><i class="fas fa-leaf"></i>QUISKEYA</div>
+                    <p class="footer-text">Delivering sustainable, chef-crafted meals that are good for you and the planet. Our mission is to make eco-friendly eating delicious and convenient.</p>
+                    <div class="footer-social">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-pinterest-p"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links-container">
+                    <h3 class="footer-title">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#how-it-works">How It Works</a></li>
+                        <li><a href="#meals">Meals</a></li>
+                        <li><a href="#calculator">Meal Planner</a></li>
+                        <li><a href="#blog">Blog</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links-container">
+                    <h3 class="footer-title">Company</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Press</a></li>
+                        <li><a href="#">Partners</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact-container">
+                    <h3 class="footer-title">Contact Us</h3>
+                    <div class="footer-contact">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>123 Green Street, Eco City, EC 12345</span>
+                    </div>
+                    <div class="footer-contact">
+                        <i class="fas fa-phone-alt"></i>
+                        <span>(555) 123-4567</span>
+                    </div>
+                    <div class="footer-contact">
+                        <i class="fas fa-envelope"></i>
+                        <span>hello@quiskeyafoods.com</span>
+                    </div>
+                    <div class="footer-newsletter">
+                        <h4>Subscribe to our newsletter</h4>
+                        <div class="newsletter-form">
+                            <input type="email" placeholder="Your email address">
+                            <button class="btn btn-small">Subscribe</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 QUISKEYA Foods. All rights reserved.</p>
+                <div class="payment-methods">
+                    <div class="payment-icon"><i class="fab fa-cc-visa"></i></div>
+                    <div class="payment-icon"><i class="fab fa-cc-mastercard"></i></div>
+                    <div class="payment-icon"><i class="fab fa-cc-amex"></i></div>
+                    <div class="payment-icon"><i class="fab fa-cc-paypal"></i></div>
+                    <div class="payment-icon"><i class="fab fa-cc-apple-pay"></i></div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Newsletter Modal -->
+    <div class="newsletter-modal">
+        <div class="newsletter-box">
+            <div class="close-modal">
+                <i class="fas fa-times"></i>
+            </div>
+            <h3>Join Our Community</h3>
+            <p>Subscribe to our newsletter for exclusive recipes, sustainability tips, and special offers.</p>
+            <div class="newsletter-form">
+                <input type="email" placeholder="Your email address">
+                <button class="btn">Subscribe</button>
+            </div>
+            <p class="newsletter-notice">By subscribing, you agree to our Privacy Policy. You can unsubscribe at any time.</p>
+        </div>
+    </div>
+
+    <!-- Back to Top Button -->
+    <div class="back-to-top">
+        <i class="fas fa-chevron-up"></i>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+// Wait for DOM to be fully loaded before attaching events
+document.addEventListener('DOMContentLoaded', function() {
+    initializeModal();
+    initializeThemeToggle();
+    initializeMobileMenu();
+    initializeAccordion();
+    initializeBackToTop();
+    initializeFadeAnimations();
+    initializeCart();
+    initializeMealPlanCalculator();
+    initializeLanguageSwitcher();
+});
+
+// Modal functionality
+function initializeModal() {
+    // Show the newsletter modal after 5 seconds
+    setTimeout(function() {
+        const newsletterModal = document.querySelector('.newsletter-modal');
+        if (newsletterModal) newsletterModal.classList.add('open');
+    }, 5000);
+
+    // Close the newsletter modal
+    const closeModalBtn = document.querySelector('.close-modal');
+    if (closeModalBtn) {
+        closeModalBtn.addEventListener('click', function() {
+            const modal = document.querySelector('.newsletter-modal');
+            if (modal) modal.classList.remove('open');
+        });
+    }
+}
+
+// Theme toggle functionality
+function initializeThemeToggle() {
+    const themeToggle = document.querySelector('.theme-toggle');
+    if (themeToggle) {
+        // Function to update icon based on current theme
+        const updateIcon = (theme) => {
+            // Assuming the toggle contains an icon element
+            const icon = themeToggle.querySelector('i') || themeToggle.querySelector('svg');
+            
+            if (icon) {
+                // If using standard classes (like Font Awesome)
+                if (theme === 'dark') {
+                    icon.classList.remove('fa-moon', 'moon-icon');
+                    icon.classList.add('fa-sun', 'sun-icon');
+                } else {
+                    icon.classList.remove('fa-sun', 'sun-icon');
+                    icon.classList.add('fa-moon', 'moon-icon');
+                }
+                
+               
+            }
+        };
+        
+        themeToggle.addEventListener('click', function() {
+            const body = document.body;
+            const currentTheme = body.getAttribute('data-theme') || 'light';
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            // Update theme on body element
+            body.setAttribute('data-theme', newTheme);
+            
+            // Update icon based on new theme
+            updateIcon(newTheme);
+            
+            // Save theme preference to localStorage
+            localStorage.setItem('theme', newTheme);
+        });
+        
+        // Apply saved theme on page load
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.body.setAttribute('data-theme', savedTheme);
+        
+        // Initialize icon based on current theme
+        updateIcon(savedTheme);
+    }
+}
+
+// Call the function when DOM is loaded
+document.addEventListener('DOMContentLoaded', initializeThemeToggle);
+
+// Call the function when DOM is loaded
+document.addEventListener('DOMContentLoaded', initializeThemeToggle);
+
+// Mobile menu functionality
+function initializeMobileMenu() {
+    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    if (mobileMenuBtn) {
+        mobileMenuBtn.addEventListener('click', function() {
+            const mobileMenu = document.querySelector('.mobile-menu');
+            if (mobileMenu) mobileMenu.classList.add('open');
+        });
+    }
+
+    const closeMenuBtn = document.querySelector('.close-menu');
+    if (closeMenuBtn) {
+        closeMenuBtn.addEventListener('click', function() {
+            const mobileMenu = document.querySelector('.mobile-menu');
+            if (mobileMenu) mobileMenu.classList.remove('open');
+        });
+    }
+}
+
+// Accordion functionality
+function initializeAccordion() {
+    const accordionHeaders = document.querySelectorAll('.accordion-header');
+    accordionHeaders.forEach(function(header) {
+        header.addEventListener('click', function() {
+            this.parentElement.classList.toggle('active');
+        });
+    });
+}
+
+// Back to top button functionality
+function initializeBackToTop() {
+    const backToTopBtn = document.querySelector('.back-to-top');
+    if (!backToTopBtn) return;
+
+    // Throttle scroll event for better performance
+    let scrollTimeout;
+    window.addEventListener('scroll', function() {
+        if (scrollTimeout) {
+            clearTimeout(scrollTimeout);
+        }
+        
+        scrollTimeout = setTimeout(function() {
+            if (window.pageYOffset > 300) {
+                backToTopBtn.classList.add('show');
+            } else {
+                backToTopBtn.classList.remove('show');
+            }
+        }, 100);
+    });
+
+    backToTopBtn.addEventListener('click', function() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+}
+
+// Fade in animations
+function initializeFadeAnimations() {
+    const fadeElements = document.querySelectorAll('.fade-in');
+    if (fadeElements.length === 0) return;
+
+    // Create IntersectionObserver for better performance than scroll event
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+                // Stop observing once the element is visible
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+
+    // Observe all fade elements
+    fadeElements.forEach(element => {
+        observer.observe(element);
+    });
+}
+
+// Cart functionality
+function initializeCart() {
+    // Initialize cart state
+    let cartItems = [];
+    const cartCount = document.querySelector('.cart-count');
+    
+    // Early return if cart count element doesn't exist
+    if (!cartCount) return;
+    
+    // Create and append cart modal
+    createCartModal();
+    
+    // Initialize cart count
+    updateCartCount();
+    
+    // Add event listeners to "add to cart" buttons
+    const addToCartButtons = document.querySelectorAll('.add-to-cart');
+    addToCartButtons.forEach(function(button) {
+        button.addEventListener('click', function() {
+            const mealCard = this.closest('.meal-card');
+            if (!mealCard) return;
+            
+            const mealName = mealCard.querySelector('h3')?.textContent || 'Unnamed Item';
+            const mealPrice = mealCard.querySelector('.price')?.textContent || '$0.00';
+            const mealImage = mealCard.querySelector('img')?.getAttribute('src') || '';
+            
+            // Add item to cart
+            cartItems.push({
+                name: mealName,
+                price: mealPrice,
+                image: mealImage,
+                quantity: 1
+            });
+            
+            // Update cart count
+            updateCartCount();
+            
+            // Show success message
+            showAddToCartSuccess(mealCard);
+        });
+    });
+
+    // Open cart modal when cart icon is clicked
+    const cartIcon = document.querySelector('.cart-icon') || document.querySelector('.nav-icon:nth-child(5)');
+    if (cartIcon) {
+        cartIcon.addEventListener('click', function() {
+            updateCartDisplay();
+            const cartModal = document.querySelector('.cart-modal');
+            if (cartModal) cartModal.classList.add('open');
+        });
+    }
+
+    // Function to update cart count display
+    function updateCartCount() {
+        cartCount.textContent = cartItems.length;
+    }
+
+    // Function to show success message when adding to cart
+    function showAddToCartSuccess(mealCard) {
+        // Remove any existing success messages first
+        const existingMessages = mealCard.querySelectorAll('.add-success');
+        existingMessages.forEach(msg => msg.remove());
+        
+        const successMessage = document.createElement('div');
+        successMessage.className = 'add-success';
+        successMessage.innerHTML = '<i class="fas fa-check"></i> Added to cart';
+        mealCard.appendChild(successMessage);
+        
+        // Use requestAnimationFrame for smoother animations
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+                successMessage.classList.add('show');
+            });
+        });
+        
+        setTimeout(function() {
+            successMessage.classList.remove('show');
+            setTimeout(function() {
+                successMessage.remove();
+            }, 300);
+        }, 2000);
+    }
+
+    // Function to create cart modal
+    function createCartModal() {
+        // Check if the modal already exists
+        if (document.querySelector('.cart-modal')) return;
+        
+        const cartModal = document.createElement('div');
+        cartModal.className = 'cart-modal';
+        cartModal.innerHTML = `
+            <div class="cart-box">
+                <div class="close-cart">
+                    <i class="fas fa-times"></i>
+                </div>
+                <h3>Your Cart</h3>
+                <div class="cart-items">
+                    <!-- Cart items will be added here dynamically -->
+                </div>
+                <div class="cart-total">
+                    <span>Total:</span>
+                    <span class="total-amount">$0.00</span>
+                </div>
+                <button class="btn btn-accent checkout-btn">Proceed to Checkout</button>
+                <button class="btn btn-secondary continue-btn">Continue Shopping</button>
+            </div>
+        `;
+        document.body.appendChild(cartModal);
+        
+        // Add styles if they don't exist
+        if (!document.querySelector('#cart-styles')) {
+            addCartStyles();
+        }
+        
+        // Add event listeners for cart modal
+        const closeCartBtn = cartModal.querySelector('.close-cart');
+        if (closeCartBtn) {
+            closeCartBtn.addEventListener('click', function() {
+                cartModal.classList.remove('open');
+            });
+        }
+        
+        const continueBtn = cartModal.querySelector('.continue-btn');
+        if (continueBtn) {
+            continueBtn.addEventListener('click', function() {
+                cartModal.classList.remove('open');
+            });
+        }
+        
+        const checkoutBtn = cartModal.querySelector('.checkout-btn');
+        if (checkoutBtn) {
+            checkoutBtn.addEventListener('click', function() {
+                if (cartItems.length === 0) return;
+                
+                alert('Proceeding to checkout... (This would normally redirect to a checkout page)');
+                // In a real application, you would redirect to a checkout page here
+            });
+        }
+    }
+
+    // Function to add cart styles
+    function addCartStyles() {
+        const cartStyle = document.createElement('style');
+        cartStyle.id = 'cart-styles';
+        cartStyle.innerHTML = `
+            .cart-modal {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.7);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                z-index: 1100;
+                opacity: 0;
+                visibility: hidden;
+                transition: opacity 0.3s ease, visibility 0.3s ease;
+            }
+            
+            .cart-modal.open {
+                opacity: 1;
+                visibility: visible;
+            }
+            
+            .cart-box {
+                width: 90%;
+                max-width: 500px;
+                background-color: var(--white, #ffffff);
+                border-radius: var(--border-radius, 8px);
+                padding: 30px;
+                position: relative;
+                box-shadow: var(--shadow, 0 4px 6px rgba(0,0,0,0.1));
+                transform: translateY(50px);
+                opacity: 0;
+                transition: transform 0.5s ease, opacity 0.5s ease;
+            }
+            
+            [data-theme="dark"] .cart-box {
+                background-color: var(--gray-light, #333);
+            }
+            
+            .cart-modal.open .cart-box {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            
+            .close-cart {
+                position: absolute;
+                top: 15px;
+                right: 15px;
+                font-size: 1.5rem;
+                cursor: pointer;
+                color: var(--text-light, #666);
+                transition: var(--transition, all 0.3s ease);
+            }
+            
+            .close-cart:hover {
+                color: var(--error, #ff3b30);
+                transform: rotate(90deg);
+            }
+            
+            .cart-items {
+                max-height: 300px;
+                overflow-y: auto;
+                margin: 20px 0;
+            }
+            
+            .cart-item {
+                display: flex;
+                align-items: center;
+                padding: 10px 0;
+                border-bottom: 1px solid var(--gray-light, #eee);
+            }
+            
+            .cart-item-image {
+                width: 60px;
+                height: 60px;
+                border-radius: var(--border-radius, 8px);
+                object-fit: cover;
+                margin-right: 15px;
+            }
+            
+            .cart-item-details {
+                flex: 1;
+            }
+            
+            .cart-item-name {
+                font-weight: 600;
+                margin-bottom: 5px;
+            }
+            
+            .cart-item-price {
+                color: var(--text-light, #666);
+                font-size: 0.9rem;
+            }
+            
+            .cart-item-quantity {
+                display: flex;
+                align-items: center;
+                margin-left: 15px;
+            }
+            
+            .quantity-btn {
+                width: 25px;
+                height: 25px;
+                border-radius: 50%;
+                background-color: var(--gray-light, #eee);
+                border: none;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                cursor: pointer;
+                font-size: 0.8rem;
+                transition: var(--transition, all 0.3s ease);
+            }
+            
+            .quantity-btn:hover {
+                background-color: var(--primary, #007bff);
+                color: white;
+            }
+            
+            .item-quantity {
+                margin: 0 10px;
+                font-weight: 600;
+            }
+            
+            .remove-item {
+                color: var(--error, #ff3b30);
+                margin-left: 15px;
+                cursor: pointer;
+                transition: var(--transition, all 0.3s ease);
+            }
+            
+            .remove-item:hover {
+                transform: scale(1.2);
+            }
+            
+            .cart-total {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                font-weight: 700;
+                font-size: 1.2rem;
+                margin-bottom: 20px;
+            }
+            
+            .checkout-btn, .continue-btn {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+            
+            .add-success {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                background-color: var(--success, #4cd964);
+                color: white;
+                padding: 5px 10px;
+                border-radius: var(--border-radius, 8px);
+                display: flex;
+                align-items: center;
+                gap: 5px;
+                transform: translateY(-10px);
+                opacity: 0;
+                transition: transform 0.3s ease, opacity 0.3s ease;
+                z-index: 5;
+            }
+            
+            .add-success.show {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            
+            .empty-cart {
+                text-align: center;
+                padding: 20px;
+                color: var(--text-light, #666);
+            }
+        `;
+        document.head.appendChild(cartStyle);
+    }
+    
+    // Function to update cart display
+    function updateCartDisplay() {
+        const cartItemsContainer = document.querySelector('.cart-items');
+        const totalAmount = document.querySelector('.total-amount');
+        
+        if (!cartItemsContainer || !totalAmount) return;
+        
+        if (cartItems.length === 0) {
+            cartItemsContainer.innerHTML = '<div class="empty-cart">Your cart is empty</div>';
+            totalAmount.textContent = '$0.00';
+            return;
+        }
+        
+        // Build all HTML at once for better performance
+        let cartHTML = '';
+        let total = 0;
+        
+        cartItems.forEach(function(item, index) {
+            const priceValue = parseFloat(item.price.replace('$', ''));
+            total += priceValue * item.quantity;
+            
+            cartHTML += `
+                <div class="cart-item">
+                    <img src="${item.image}" alt="${item.name}" class="cart-item-image">
+                    <div class="cart-item-details">
+                        <div class="cart-item-name">${item.name}</div>
+                        <div class="cart-item-price">${item.price}</div>
+                    </div>
+                    <div class="cart-item-quantity">
+                        <button class="quantity-btn decrease-btn" data-index="${index}">-</button>
+                        <span class="item-quantity">${item.quantity}</span>
+                        <button class="quantity-btn increase-btn" data-index="${index}">+</button>
+                    </div>
+                    <div class="remove-item" data-index="${index}">
+                        <i class="fas fa-trash-alt"></i>
+                    </div>
+                </div>
+            `;
+        });
+        
+        cartItemsContainer.innerHTML = cartHTML;
+        totalAmount.textContent = '$' + total.toFixed(2);
+        
+        // Add event listeners for quantity buttons and remove buttons
+        attachQuantityButtons();
+    }
+    
+    // Function to attach event listeners to quantity buttons
+    function attachQuantityButtons() {
+        // Delegate events to the cart items container for better performance
+        const cartItemsContainer = document.querySelector('.cart-items');
+        if (!cartItemsContainer) return;
+        
+        cartItemsContainer.addEventListener('click', function(e) {
+            // Handle increase button click
+            if (e.target.classList.contains('increase-btn')) {
+                const index = parseInt(e.target.getAttribute('data-index'));
+                cartItems[index].quantity++;
+                updateCartDisplay();
+            }
+            
+            // Handle decrease button click
+            if (e.target.classList.contains('decrease-btn')) {
+                const index = parseInt(e.target.getAttribute('data-index'));
+                if (cartItems[index].quantity > 1) {
+                    cartItems[index].quantity--;
+                } else {
+                    cartItems.splice(index, 1);
+                    updateCartCount();
+                }
+                updateCartDisplay();
+            }
+            
+            // Handle remove button click
+            if (e.target.classList.contains('remove-item') || e.target.closest('.remove-item')) {
+                const removeBtn = e.target.classList.contains('remove-item') ? 
+                    e.target : e.target.closest('.remove-item');
+                const index = parseInt(removeBtn.getAttribute('data-index'));
+                cartItems.splice(index, 1);
+                updateCartCount();
+                updateCartDisplay();
+            }
+        });
+    }
+}
+
+// Function to initialize the AI Meal Calculator
+function initializeAIMealCalculator() {
+    const calculatorForm = document.querySelector('.calculator-form');
+    const calculatorResult = document.querySelector('.calculator-result');
+    const getPersonalizedPlanBtn = document.querySelector('.calculator-form .btn');
+    
+    // Early return if elements don't exist
+    if (!calculatorForm || !calculatorResult || !getPersonalizedPlanBtn) return;
+    
+    // Initially hide the results
+    calculatorResult.style.display = 'none';
+    
+    // Handle the button click event
+    getPersonalizedPlanBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        generateMealPlan();
+    });
+    
+    // Function to generate the meal plan based on user input
+    function generateMealPlan() {
+        // Get all the user inputs
+        const goal = document.getElementById('goal').value;
+        const diet = document.getElementById('diet').value;
+        const allergies = document.getElementById('allergies').value;
+        const mealsPerWeek = parseInt(document.getElementById('meals-per-week').value);
+        
+        // Determine the plan type based on the goal
+        let planName, caloriesRange, proteinRange, costPerWeek;
+        
+        switch(goal) {
+            case 'weight-loss':
+                planName = 'Calorie Control';
+                caloriesRange = '1500-1700';
+                proteinRange = '90-110';
+                costPerWeek = (mealsPerWeek * 12.99).toFixed(2);
+                break;
+            case 'maintenance':
+                planName = 'Balance & Sustain';
+                caloriesRange = '1800-2000';
+                proteinRange = '100-120';
+                costPerWeek = (mealsPerWeek * 13.95).toFixed(2);
+                break;
+            case 'muscle-gain':
+                planName = 'Muscle Builder';
+                caloriesRange = '2200-2500';
+                proteinRange = '140-160';
+                costPerWeek = (mealsPerWeek * 14.95).toFixed(2);
+                break;
+            case 'health':
+                planName = 'Fit & Active';
+                caloriesRange = '1800-2000';
+                proteinRange = '100-120';
+                costPerWeek = (mealsPerWeek * 12.99).toFixed(2);
+                break;
+            default:
+                planName = 'Balanced Nutrition';
+                caloriesRange = '1800-2000';
+                proteinRange = '100-120';
+                costPerWeek = (mealsPerWeek * 12.99).toFixed(2);
+        }
+        
+        // Adjust based on dietary preference
+        let mealOptions = [];
+        
+        // Define meal options based on diet type
+        if (diet === 'omnivore') {
+            mealOptions = [
+                { name: 'Mediterranean Chicken', description: 'With quinoa & vegetables', calories: 410 },
+                { name: 'Herb-Crusted Salmon', description: 'With sweet potato mash', calories: 450 },
+                { name: 'Grass-Fed Beef Bowl', description: 'With brown rice & vegetables', calories: 520 },
+                { name: 'Turkey Meatballs', description: 'With whole grain pasta', calories: 480 }
+            ];
+        } else if (diet === 'vegetarian') {
+            mealOptions = [
+                { name: 'Spinach & Feta Frittata', description: 'With roasted potatoes', calories: 380 },
+                { name: 'Vegetable Curry', description: 'With brown basmati rice', calories: 420 },
+                { name: 'Mushroom Risotto', description: 'With asparagus & peas', calories: 450 },
+                { name: 'Stuffed Bell Peppers', description: 'With quinoa & cheese', calories: 390 }
+            ];
+        } else if (diet === 'vegan') {
+            mealOptions = [
+                { name: 'Chickpea Buddha Bowl', description: 'With tahini dressing', calories: 390 },
+                { name: 'Lentil & Vegetable Stew', description: 'With crusty bread', calories: 420 },
+                { name: 'Tofu Stir-Fry', description: 'With brown rice', calories: 380 },
+                { name: 'Sweet Potato Black Bean Bowl', description: 'With avocado', calories: 450 }
+            ];
+        } else if (diet === 'keto') {
+            mealOptions = [
+                { name: 'Avocado & Bacon Salad', description: 'With ranch dressing', calories: 520 },
+                { name: 'Salmon with Asparagus', description: 'With hollandaise sauce', calories: 490 },
+                { name: 'Beef & Broccoli Bowl', description: 'With cauliflower rice', calories: 510 },
+                { name: 'Spinach & Chicken Alfredo', description: 'With zucchini noodles', calories: 480 }
+            ];
+        } else if (diet === 'paleo') {
+            mealOptions = [
+                { name: 'Grass-Fed Steak', description: 'With roasted vegetables', calories: 530 },
+                { name: 'Baked Chicken Thighs', description: 'With sweet potato', calories: 490 },
+                { name: 'Wild-Caught Cod', description: 'With cauliflower mash', calories: 420 },
+                { name: 'Turkey & Vegetable Skillet', description: 'With avocado', calories: 470 }
+            ];
+        }
+        
+        // Filter out allergens
+        if (allergies !== 'none') {
+            let filteredOptions = [...mealOptions];
+            
+            // Basic allergen filtering logic
+            if (allergies === 'gluten') {
+                filteredOptions = mealOptions.filter(meal => 
+                    !meal.description.toLowerCase().includes('pasta') && 
+                    !meal.description.toLowerCase().includes('bread'));
+            } else if (allergies === 'dairy') {
+                filteredOptions = mealOptions.filter(meal => 
+                    !meal.description.toLowerCase().includes('cheese') && 
+                    !meal.name.toLowerCase().includes('alfredo'));
+            } else if (allergies === 'nuts') {
+                filteredOptions = mealOptions.filter(meal => 
+                    !meal.description.toLowerCase().includes('nuts'));
+            } else if (allergies === 'soy') {
+                filteredOptions = mealOptions.filter(meal => 
+                    !meal.name.toLowerCase().includes('tofu'));
+            }
+            
+            // Only update if we still have enough meals
+            if (filteredOptions.length >= 2) {
+                mealOptions = filteredOptions;
+            }
+        }
+        
+        // Shuffle and select 2 meals to display
+        shuffleArray(mealOptions);
+        const selectedMeals = mealOptions.slice(0, 2);
+        
+        // Update the results in the UI
+        updateResultDisplay(planName, caloriesRange, proteinRange, costPerWeek, mealsPerWeek, selectedMeals);
+        
+        // Show the results
+        calculatorResult.style.display = 'block';
+        calculatorForm.style.display = 'none';
+        
+        // Scroll to results if needed
+        if (!isElementInViewport(calculatorResult)) {
+            calculatorResult.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    }
+    
+    // Function to update the result display
+    function updateResultDisplay(planName, caloriesRange, proteinRange, costPerWeek, mealsPerWeek, selectedMeals) {
+        // Update plan details
+        const resultBox = calculatorResult.querySelector('.result-box');
+        if (resultBox) {
+            resultBox.innerHTML = `
+                <h4>Ideal Plan: ${planName}</h4>
+                <p><strong>Calories:</strong> ${caloriesRange} per day</p>
+                <p><strong>Protein:</strong> ${proteinRange}g per day</p>
+                <p><strong>Cost:</strong> $${costPerWeek}/week (${mealsPerWeek} meals)</p>
+            `;
+        }
+        
+        // Update recommended meals
+        const resultMeals = calculatorResult.querySelector('.result-meals');
+        if (resultMeals && selectedMeals.length > 0) {
+            resultMeals.innerHTML = '';
+            
+            selectedMeals.forEach(meal => {
+                const mealElement = document.createElement('div');
+                mealElement.className = 'result-meal';
+                mealElement.innerHTML = `
+                    <div class="result-meal-info">
+                        <img src="/api/placeholder/100/100" alt="${meal.name}">
+                        <div>
+                            <h4>${meal.name}</h4>
+                            <p>${meal.description}</p>
+                        </div>
+                    </div>
+                    <div class="result-meal-calories">${meal.calories} cal</div>
+                `;
+                resultMeals.appendChild(mealElement);
+            });
+        }
+        
+        // Add "Go Back" button if it doesn't exist
+        if (!calculatorResult.querySelector('.btn-secondary')) {
+            const goBackBtn = document.createElement('button');
+            goBackBtn.className = 'btn btn-secondary';
+            goBackBtn.style.cssText = 'width: 100%; margin-top: 10px;';
+            goBackBtn.textContent = 'Adjust Preferences';
+            goBackBtn.addEventListener('click', function() {
+                // Switch back to the form
+                calculatorForm.style.display = 'block';
+                calculatorResult.style.display = 'none';
+            });
+            
+            // Add it after the "Order This Plan" button
+            const orderBtn = calculatorResult.querySelector('.btn-accent');
+            if (orderBtn) {
+                orderBtn.parentNode.insertBefore(goBackBtn, orderBtn.nextSibling);
+            }
+        }
+    }
+    
+    // Helper function to shuffle array (Fisher-Yates algorithm)
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+    
+    // Helper function to check if element is in viewport
+    function isElementInViewport(el) {
+        const rect = el.getBoundingClientRect();
+        return (
+            rect.top >= 0 &&
+            rect.left >= 0 &&
+            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+        );
+    }
+    
+    // Add click event to "Order This Plan" button
+    const orderPlanBtn = calculatorResult.querySelector('.btn-accent');
+    if (orderPlanBtn) {
+        orderPlanBtn.addEventListener('click', function() {
+            // Get current plan details
+            const planName = calculatorResult.querySelector('.result-box h4').textContent.replace('Ideal Plan: ', '');
+            const mealsPerWeek = document.getElementById('meals-per-week').value;
+            
+            // Create a cart item based on the meal plan
+            const cartItems = window.cartItems || [];
+            
+            cartItems.push({
+                name: `${planName} Meal Plan`,
+                price: `$${(mealsPerWeek * 13.95).toFixed(2)}`,
+                image: '/api/placeholder/60/60',
+                quantity: 1,
+                description: `${mealsPerWeek} meals per week`
+            });
+            
+            // Save to global cart
+            window.cartItems = cartItems;
+            
+            // Update cart count
+            const cartCount = document.querySelector('.cart-count');
+            if (cartCount) {
+                cartCount.textContent = cartItems.length;
+            }
+            
+            // Show success message
+            const successMessage = document.createElement('div');
+            successMessage.className = 'success-message';
+            successMessage.textContent = 'Plan added to cart!';
+            successMessage.style.cssText = 'background-color: var(--success, #4cd964); color: white; padding: 10px; border-radius: 4px; margin-top: 10px; text-align: center;';
+            
+            // Add the message below the buttons
+            calculatorResult.appendChild(successMessage);
+            
+            // Remove after a delay
+            setTimeout(() => {
+                successMessage.remove();
+            }, 3000);
+            
+            // Open the cart modal
+            const cartModal = document.querySelector('.cart-modal');
+            if (cartModal) {
+                // Trigger window.updateCartDisplay if it exists
+                if (typeof window.updateCartDisplay === 'function') {
+                    window.updateCartDisplay();
+                }
+                
+                // Show the cart
+                cartModal.classList.add('open');
+            }
+        });
+    }
+}
+
+// Connect the cart functionality with the existing code
+function connectCartFunctionalityWithAIMealPlanner() {
+    // Create a global cart items array if it doesn't exist
+    window.cartItems = window.cartItems || [];
+    
+    // Define a global updateCartDisplay function to be used by other modules
+    window.updateCartDisplay = function() {
+        const cartItemsContainer = document.querySelector('.cart-items');
+        const totalAmount = document.querySelector('.total-amount');
+        
+        if (!cartItemsContainer || !totalAmount) return;
+        
+        if (window.cartItems.length === 0) {
+            cartItemsContainer.innerHTML = '<div class="empty-cart">Your cart is empty</div>';
+            totalAmount.textContent = '$0.00';
+            return;
+        }
+        
+        // Build all HTML at once for better performance
+        let cartHTML = '';
+        let total = 0;
+        
+        window.cartItems.forEach(function(item, index) {
+            const priceValue = parseFloat(item.price.replace('$', ''));
+            total += priceValue * item.quantity;
+            
+            cartHTML += `
+                <div class="cart-item">
+                    <img src="${item.image}" alt="${item.name}" class="cart-item-image">
+                    <div class="cart-item-details">
+                        <div class="cart-item-name">${item.name}</div>
+                        <div class="cart-item-price">${item.price}</div>
+                        ${item.description ? `<div class="cart-item-description">${item.description}</div>` : ''}
+                    </div>
+                    <div class="cart-item-quantity">
+                        <button class="quantity-btn decrease-btn" data-index="${index}">-</button>
+                        <span class="item-quantity">${item.quantity}</span>
+                        <button class="quantity-btn increase-btn" data-index="${index}">+</button>
+                    </div>
+                    <div class="remove-item" data-index="${index}">
+                        <i class="fas fa-trash-alt"></i>
+                    </div>
+                </div>
+            `;
+        });
+        
+        cartItemsContainer.innerHTML = cartHTML;
+        totalAmount.textContent = '$' + total.toFixed(2);
+        
+        // Make sure we have all event listeners for quantity changes
+        attachCartQuantityButtons();
+    };
+    
+    // Function to attach event listeners to quantity buttons
+    function attachCartQuantityButtons() {
+        const cartItemsContainer = document.querySelector('.cart-items');
+        if (!cartItemsContainer) return;
+        
+        cartItemsContainer.addEventListener('click', function(e) {
+            // Handle increase button click
+            if (e.target.classList.contains('increase-btn')) {
+                const index = parseInt(e.target.getAttribute('data-index'));
+                window.cartItems[index].quantity++;
+                window.updateCartDisplay();
+            }
+            
+            // Handle decrease button click
+            if (e.target.classList.contains('decrease-btn')) {
+                const index = parseInt(e.target.getAttribute('data-index'));
+                if (window.cartItems[index].quantity > 1) {
+                    window.cartItems[index].quantity--;
+                } else {
+                    window.cartItems.splice(index, 1);
+                    // Update cart count
+                    const cartCount = document.querySelector('.cart-count');
+                    if (cartCount) {
+                        cartCount.textContent = window.cartItems.length;
+                    }
+                }
+                window.updateCartDisplay();
+            }
+            
+            // Handle remove button click
+            if (e.target.classList.contains('remove-item') || e.target.closest('.remove-item')) {
+                const removeBtn = e.target.classList.contains('remove-item') ? 
+                    e.target : e.target.closest('.remove-item');
+                const index = parseInt(removeBtn.getAttribute('data-index'));
+                window.cartItems.splice(index, 1);
+                // Update cart count
+                const cartCount = document.querySelector('.cart-count');
+                if (cartCount) {
+                    cartCount.textContent = window.cartItems.length;
+                }
+                window.updateCartDisplay();
+            }
+        });
+    }
+}
+
+// Initialize AI Meal Calculator when DOM is fully loaded
+document.addEventListener('DOMContentLoaded', function() {
+    initializeAIMealCalculator();
+    connectCartFunctionalityWithAIMealPlanner();
+});
+
+            // Open the cart modal
+            const cartModal = document.querySelector('.cart-modal');
+            if (cartModal) {
+                // Trigger window.updateCartDisplay if it exists
+                if (typeof window.updateCartDisplay === 'function') {
+                    window.updateCartDisplay();
+                }
+                
+                // Show the cart
+                cartModal.classList.add('open');
+            }
+    
+
+// Connect the cart functionality with the existing code
+function connectCartFunctionalityWithAIMealPlanner() {
+    // Create a global cart items array if it doesn't exist
+    window.cartItems = window.cartItems || [];
+    
+    // Define a global updateCartDisplay function to be used by other modules
+    window.updateCartDisplay = function() {
+        const cartItemsContainer = document.querySelector('.cart-items');
+        const totalAmount = document.querySelector('.total-amount');
+        
+        if (!cartItemsContainer || !totalAmount) return;
+        
+        if (window.cartItems.length === 0) {
+            cartItemsContainer.innerHTML = '<div class="empty-cart">Your cart is empty</div>';
+            totalAmount.textContent = '$0.00';
+            return;
+        }
+        
+        // Build all HTML at once for better performance
+        let cartHTML = '';
+        let total = 0;
+        
+        window.cartItems.forEach(function(item, index) {
+            const priceValue = parseFloat(item.price.replace('$', ''));
+            total += priceValue * item.quantity;
+            
+            cartHTML += `
+                <div class="cart-item">
+                    <img src="${item.image}" alt="${item.name}" class="cart-item-image">
+                    <div class="cart-item-details">
+                        <div class="cart-item-name">${item.name}</div>
+                        <div class="cart-item-price">${item.price}</div>
+                        ${item.description ? `<div class="cart-item-description">${item.description}</div>` : ''}
+                    </div>
+                    <div class="cart-item-quantity">
+                        <button class="quantity-btn decrease-btn" data-index="${index}">-</button>
+                        <span class="item-quantity">${item.quantity}</span>
+                        <button class="quantity-btn increase-btn" data-index="${index}">+</button>
+                    </div>
+                    <div class="remove-item" data-index="${index}">
+                        <i class="fas fa-trash-alt"></i>
+                    </div>
+                </div>
+            `;
+        });
+        
+        cartItemsContainer.innerHTML = cartHTML;
+        totalAmount.textContent = '$' + total.toFixed(2);
+        
+        // Make sure we have all event listeners for quantity changes
+        attachCartQuantityButtons();
+    };
+    
+    // Function to attach event listeners to quantity buttons
+    function attachCartQuantityButtons() {
+        const cartItemsContainer = document.querySelector('.cart-items');
+        if (!cartItemsContainer) return;
+        
+        cartItemsContainer.addEventListener('click', function(e) {
+            // Handle increase button click
+            if (e.target.classList.contains('increase-btn')) {
+                const index = parseInt(e.target.getAttribute('data-index'));
+                window.cartItems[index].quantity++;
+                window.updateCartDisplay();
+            }
+            
+            // Handle decrease button click
+            if (e.target.classList.contains('decrease-btn')) {
+                const index = parseInt(e.target.getAttribute('data-index'));
+                if (window.cartItems[index].quantity > 1) {
+                    window.cartItems[index].quantity--;
+                } else {
+                    window.cartItems.splice(index, 1);
+                    // Update cart count
+                    const cartCount = document.querySelector('.cart-count');
+                    if (cartCount) {
+                        cartCount.textContent = window.cartItems.length;
+                    }
+                }
+                window.updateCartDisplay();
+            }
+            
+            // Handle remove button click
+            if (e.target.classList.contains('remove-item') || e.target.closest('.remove-item')) {
+                const removeBtn = e.target.classList.contains('remove-item') ? 
+                    e.target : e.target.closest('.remove-item');
+                const index = parseInt(removeBtn.getAttribute('data-index'));
+                window.cartItems.splice(index, 1);
+                // Update cart count
+                const cartCount = document.querySelector('.cart-count');
+                if (cartCount) {
+                    cartCount.textContent = window.cartItems.length;
+                }
+                window.updateCartDisplay();
+            }
+        });
+    }
+}
+
+    // Helper function to check if element is in viewport
+    function isElementInViewport(el) {
+        const rect = el.getBoundingClientRect();
+        return (
+            rect.top >= 0 &&
+            rect.left >= 0 &&
+            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+        );
+    }
+
+
+
+// Language switcher functionality
+function initializeLanguageSwitcher() {
+    const languageSwitch = document.querySelector('.language-switch');
+    if (languageSwitch) {
+        languageSwitch.addEventListener('click', function() {
+            const currentLang = document.documentElement.lang || 'en';
+            if (currentLang === 'en') {
+                document.documentElement.lang = 'es';
+                this.textContent = 'EN'; // Show EN when in Spanish mode
+                switchToSpanish();
+            } else {
+                document.documentElement.lang = 'en';
+                this.textContent = 'ES'; // Show ES when in English mode
+                switchToEnglish();
+            }
+        });
+    }
+}
+
+// Helper functions for language switching
+function switchToSpanish() {
+    // This is a placeholder - you would need to replace text content with Spanish translations
+    const translations = {
+        'Your Cart': 'Tu Carrito',
+        'Proceed to Checkout': 'Proceder al Pago',
+        'Continue Shopping': 'Continuar Comprando',
+        'Your cart is empty': 'Tu carrito está vacío',
+        'Your Meal Plan Results': 'Resultados de tu Plan de Comidas',
+        'Daily Calories:': 'Calorías Diarias:',
+        'Protein:': 'Proteína:',
+        'Carbohydrates:': 'Carbohidratos:',
+        'Fat:': 'Grasa:',
+        'This meal plan is based on your specific needs to': 'Este plan de comidas se basa en tus necesidades específicas para',
+        'weight.': 'peso.',
+        'For optimal results, spread your macronutrients across 3-5 meals per day.': 'Para obtener resultados óptimos, distribuye tus macronutrientes en 3-5 comidas por día.',
+        'lose': 'perder',
+        'maintain': 'mantener',
+        'gain': 'aumentar'
+        // Add more translations as needed
+    };
+    
+    // Apply translations
+    for (const [english, spanish] of Object.entries(translations)) {
+        document.querySelectorAll(`h1, h2, h3, h4, h5, h6, p, button, a, span, div`).forEach(el => {
+            if (el.textContent.trim() === english) {
+                el.textContent = spanish;
+            }
+        });
+    }
+}
+
+function switchToEnglish() {
+    // Using a more efficient approach than reloading the page
+    const translations = {
+        'Tu Carrito': 'Your Cart',
+        'Proceder al Pago': 'Proceed to Checkout',
+        'Continuar Comprando': 'Continue Shopping',
+        'Tu carrito está vacío': 'Your cart is empty',
+        'Resultados de tu Plan de Comidas': 'Your Meal Plan Results',
+        'Calorías Diarias:': 'Daily Calories:',
+        'Proteína:': 'Protein:',
+        'Carbohidratos:': 'Carbohydrates:',
+        'Grasa:': 'Fat:',
+        'Este plan de comidas se basa en tus necesidades específicas para': 'This meal plan is based on your specific needs to',
+        'peso.': 'weight.',
+        'Para obtener resultados óptimos, distribuye tus macronutrientes en 3-5 comidas por día.': 'For optimal results, spread your macronutrients across 3-5 meals per day.',
+        'perder': 'lose',
+        'mantener': 'maintain',
+        'aumentar': 'gain'
+        // Add more translations as needed
+    };
+    
+    // Apply translations
+    for (const [spanish, english] of Object.entries(translations)) {
+        document.querySelectorAll(`h1, h2, h3, h4, h5, h6, p, button, a, span, div`).forEach(el => {
+            if (el.textContent.trim() === spanish) {
+                el.textContent = english;
+            }
+        });
+    }
+}
+
+// Helper function to handle smooth scrolling for anchor links
+function initializeSmoothScroll() {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const targetId = this.getAttribute('href');
+            
+            // Skip if it's just "#" (often used for javascript actions)
+            if (targetId === '#') return;
+            
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                e.preventDefault();
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80, // Adjust for fixed header
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+}
+
+// Initialize form validation
+function initializeFormValidation() {
+    const forms = document.querySelectorAll('form');
+    forms.forEach(form => {
+        const inputs = form.querySelectorAll('input[required], select[required], textarea[required]');
+        
+        form.addEventListener('submit', function(e) {
+            let isValid = true;
+            
+            inputs.forEach(input => {
+                // Remove any existing error messages
+                const existingError = input.parentElement.querySelector('.error-message');
+                if (existingError) existingError.remove();
+                
+                // Reset input styling
+                input.classList.remove('error');
+                
+                if (!input.validity.valid) {
+                    e.preventDefault();
+                    isValid = false;
+                    
+                    // Add error styling
+                    input.classList.add('error');
+                    
+                    // Create error message
+                    const errorMessage = document.createElement('div');
+                    errorMessage.className = 'error-message';
+                    
+                    // Set appropriate error message
+                    if (input.validity.valueMissing) {
+                        errorMessage.textContent = 'This field is required';
+                    } else if (input.validity.typeMismatch) {
+                        errorMessage.textContent = 'Please enter a valid format';
+                    } else if (input.validity.patternMismatch) {
+                        errorMessage.textContent = 'Please match the requested format';
+                    } else if (input.validity.tooShort) {
+                        errorMessage.textContent = `Please enter at least ${input.minLength} characters`;
+                    } else if (input.validity.tooLong) {
+                        errorMessage.textContent = `Please enter at most ${input.maxLength} characters`;
+                    } else if (input.validity.rangeUnderflow) {
+                        errorMessage.textContent = `Please enter a value greater than or equal to ${input.min}`;
+                    } else if (input.validity.rangeOverflow) {
+                        errorMessage.textContent = `Please enter a value less than or equal to ${input.max}`;
+                    } else if (input.validity.stepMismatch) {
+                        errorMessage.textContent = `Please enter a valid value`;
+                    }
+                    
+                    // Append error message
+                    input.parentElement.appendChild(errorMessage);
+                }
+            });
+            
+            // Show success message if form is valid
+            if (isValid) {
+                // If it's not a form that should submit to a server, prevent default
+                if (form.getAttribute('data-no-submit') === 'true') {
+                    e.preventDefault();
+                    
+                    // Show success message
+                    const successMessage = document.createElement('div');
+                    successMessage.className = 'success-message';
+                    successMessage.textContent = 'Form submitted successfully!';
+                    
+                    form.appendChild(successMessage);
+                    
+                    // Reset form
+                    setTimeout(() => {
+                        form.reset();
+                        successMessage.remove();
+                    }, 3000);
+                }
+            }
+        });
+        
+        // Real-time validation feedback
+        inputs.forEach(input => {
+            input.addEventListener('blur', function() {
+                // Remove any existing error messages
+                const existingError = input.parentElement.querySelector('.error-message');
+                if (existingError) existingError.remove();
+                
+                // Reset input styling
+                input.classList.remove('error');
+                
+                if (!input.validity.valid) {
+                    // Add error styling
+                    input.classList.add('error');
+                }
+            });
+        });
+    });
+}
+
+// Initialize lazy loading for images
+function initializeLazyLoading() {
+    // Check if the browser supports IntersectionObserver
+    if ('IntersectionObserver' in window) {
+        const imgObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    img.src = img.dataset.src;
+                    img.classList.remove('lazy');
+                    observer.unobserve(img);
+                }
+            });
+        });
+        
+        // Target all images with data-src attribute
+        document.querySelectorAll('img[data-src]').forEach(img => {
+            imgObserver.observe(img);
+        });
+    } else {
+        // Fallback for browsers that don't support IntersectionObserver
+        const lazyImages = document.querySelectorAll('img[data-src]');
+        
+        function lazyLoad() {
+            const scrollTop = window.pageYOffset;
+            lazyImages.forEach(img => {
+                if (img.offsetTop < window.innerHeight + scrollTop) {
+                    img.src = img.dataset.src;
+                    img.classList.remove('lazy');
+                }
+            });
+            
+            // If all images are loaded, remove the scroll event listener
+            if (lazyImages.length === 0) {
+                window.removeEventListener('scroll', lazyLoad);
+            }
+        }
+        
+        // Load initial images in viewport
+        lazyLoad();
+        
+        // Add scroll event with throttling
+        let lazyLoadThrottleTimeout;
+        window.addEventListener('scroll', function() {
+            if (lazyLoadThrottleTimeout) {
+                clearTimeout(lazyLoadThrottleTimeout);
+            }
+            
+            lazyLoadThrottleTimeout = setTimeout(lazyLoad, 200);
+        });
+    }
+}
+
+// Initialize all components on page load
+document.addEventListener('DOMContentLoaded', function() {
+    initializeModal();
+    initializeThemeToggle();
+    initializeMobileMenu();
+    initializeAccordion();
+    initializeBackToTop();
+    initializeFadeAnimations();
+    initializeCart();
+    initializeMealPlanCalculator();
+    initializeLanguageSwitcher();
+    initializeSmoothScroll();
+    initializeFormValidation();
+    initializeLazyLoading();
+});
+    </script>
+</body>
+</html>
